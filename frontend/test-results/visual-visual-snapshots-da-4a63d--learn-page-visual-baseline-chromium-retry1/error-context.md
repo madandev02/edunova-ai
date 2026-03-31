@@ -1,0 +1,156 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: EduNova AI
+      - heading "Learn Smarter" [level=1] [ref=e7]
+      - paragraph [ref=e8]: AI-powered courses, adaptive recommendations, and personalized learning velocity.
+    - generic [ref=e9]:
+      - paragraph [ref=e10]: Signed in
+      - paragraph [ref=e11]: visual_1774822902262@edunova.ai
+      - paragraph [ref=e12]: BEGINNER level
+    - navigation [ref=e13]:
+      - link "Dashboard" [ref=e14] [cursor=pointer]:
+        - /url: /app/dashboard
+        - img [ref=e15]
+        - text: Dashboard
+      - link "Courses" [ref=e20] [cursor=pointer]:
+        - /url: /app/courses
+        - img [ref=e21]
+        - text: Courses
+      - link "Learning Path" [ref=e23] [cursor=pointer]:
+        - /url: /app/learning-path
+        - img [ref=e24]
+        - text: Learning Path
+      - link "Analytics" [ref=e28] [cursor=pointer]:
+        - /url: /app/analytics
+        - img [ref=e29]
+        - text: Analytics
+      - link "Assistant" [ref=e31] [cursor=pointer]:
+        - /url: /app/assistant
+        - img [ref=e32]
+        - text: Assistant
+    - button "Sign out" [ref=e35] [cursor=pointer]:
+      - img [ref=e36]
+      - text: Sign out
+  - main [ref=e39]:
+    - generic [ref=e40]:
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - paragraph [ref=e44]: Learning Intelligence
+          - heading "Your adaptive learning command center" [level=2] [ref=e45]
+          - paragraph [ref=e46]: EduNova uses your real attempts and outcomes to prioritize what to study next and why.
+        - generic [ref=e47]:
+          - paragraph [ref=e48]: Current focus
+          - paragraph [ref=e49]: Big-O for Real Systems
+          - paragraph [ref=e50]: "New content suggestion: Big-O for Real Systems keeps your learning momentum."
+          - link "Open recommended path" [ref=e51] [cursor=pointer]:
+            - /url: /app/learning-path
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - paragraph [ref=e54]:
+            - img [ref=e55]
+            - text: Progress
+          - paragraph [ref=e58]: 0%
+        - generic [ref=e60]:
+          - paragraph [ref=e61]:
+            - img [ref=e62]
+            - text: Current level
+          - paragraph [ref=e66]: BEGINNER
+          - paragraph [ref=e67]: Adjusted from onboarding + weighted assessment performance.
+        - generic [ref=e68]:
+          - generic [ref=e69]:
+            - generic [ref=e70]:
+              - paragraph [ref=e71]:
+                - img [ref=e72]
+                - text: Weak areas
+              - paragraph [ref=e76]: "0"
+            - generic [ref=e77]:
+              - paragraph [ref=e78]:
+                - img [ref=e79]
+                - text: Attempts
+              - paragraph [ref=e81]: "0"
+          - generic [ref=e82]:
+            - generic [ref=e83]:
+              - paragraph [ref=e84]: XP
+              - paragraph [ref=e85]: "0"
+            - generic [ref=e86]:
+              - paragraph [ref=e87]: Streak
+              - paragraph [ref=e88]: 0 days
+      - generic [ref=e89]:
+        - generic [ref=e90]:
+          - generic [ref=e91]:
+            - generic [ref=e92]:
+              - heading "AI Recommendations" [level=3] [ref=e93]
+              - paragraph [ref=e94]: Every recommendation includes a reason generated from your performance.
+            - link "Open path" [ref=e95] [cursor=pointer]:
+              - /url: /app/learning-path
+          - generic [ref=e96]:
+            - article [ref=e97]:
+              - generic [ref=e98]:
+                - generic [ref=e99]:
+                  - heading "Big-O for Real Systems" [level=4] [ref=e100]
+                  - paragraph [ref=e101]:
+                    - img [ref=e102]
+                    - text: AI recommendation
+                - generic [ref=e105]: Low
+              - paragraph [ref=e106]: "New content suggestion: Big-O for Real Systems keeps your learning momentum."
+            - article [ref=e107]:
+              - generic [ref=e108]:
+                - generic [ref=e109]:
+                  - heading "Recursive Trees and Backtracking" [level=4] [ref=e110]
+                  - paragraph [ref=e111]:
+                    - img [ref=e112]
+                    - text: AI recommendation
+                - generic [ref=e115]: Low
+              - paragraph [ref=e116]: "New content suggestion: Recursive Trees and Backtracking keeps your learning momentum."
+            - article [ref=e117]:
+              - generic [ref=e118]:
+                - generic [ref=e119]:
+                  - heading "Base Cases and Recursive Calls" [level=4] [ref=e120]
+                  - paragraph [ref=e121]:
+                    - img [ref=e122]
+                    - text: AI recommendation
+                - generic [ref=e125]: Medium
+              - paragraph [ref=e126]: Start your next incomplete lesson to unlock personalized recommendations.
+        - generic [ref=e127]:
+          - heading "Weak Areas" [level=3] [ref=e128]
+          - paragraph [ref=e129]: Low scores are highlighted in red to focus effort.
+          - generic [ref=e131]:
+            - heading "No weak areas" [level=3] [ref=e132]
+            - paragraph [ref=e133]: Great progress. Keep submitting quizzes to maintain strong coverage.
+      - generic [ref=e134]:
+        - generic [ref=e135]:
+          - heading "Resume Where You Left Off" [level=3] [ref=e136]
+          - link "Open catalog" [ref=e137] [cursor=pointer]:
+            - /url: /app/courses
+        - paragraph [ref=e138]: Continue incomplete video lessons without losing your context.
+        - generic [ref=e140]:
+          - heading "No resume items" [level=3] [ref=e141]
+          - paragraph [ref=e142]: Start watching a lesson video and your resume chips will appear here.
+      - generic [ref=e143]:
+        - heading "Recent Activity" [level=3] [ref=e144]
+        - paragraph [ref=e145]: Latest attempts from the recommendation engine feed.
+        - generic [ref=e147]:
+          - heading "No attempts recorded" [level=3] [ref=e148]
+          - paragraph [ref=e149]: Your latest quiz attempts will appear here with real scores and timestamps.
+      - generic [ref=e150]:
+        - generic [ref=e151]:
+          - heading "Skill Engine Snapshot" [level=3] [ref=e152]
+          - paragraph [ref=e153]: Scores update from quiz outcomes, attempts, and time invested.
+          - generic [ref=e156]:
+            - generic [ref=e157]: backend
+            - generic [ref=e158]: 38%
+          - generic [ref=e161]:
+            - paragraph [ref=e162]: Top strengths
+            - generic [ref=e164]: backend 38%
+        - generic [ref=e165]:
+          - heading "Achievements" [level=3] [ref=e166]
+          - paragraph [ref=e167]: Productive streaks and mastery milestones become visible badges.
+          - paragraph [ref=e169]: Complete your first lesson to unlock your first badge.
+  - button "Ask AI" [ref=e171] [cursor=pointer]:
+    - img [ref=e172]
+    - text: Ask AI
+```

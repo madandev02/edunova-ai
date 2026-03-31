@@ -1,0 +1,178 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  frontend:
+    name: Frontend Lint and Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+  frontend-unit-tests:
+    name: Frontend Unit Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm run test:unit
+
+  backend-tests:
+    name: Backend Unit Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: PYTHONPATH=. pytest -q
+
+  compose-smoke:
+    name: Docker Compose Health and Smoke E2E
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Start stack
+        run: docker compose up --build -d
+
+      - name: Wait for backend health
+        run: |
+          for i in {1..30}; do
+            if curl -fsS http://localhost:8000/health > /dev/null; then
+              echo "Backend healthy"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Backend did not become healthy in time"
+          docker compose logs backend
+          exit 1
+
+      - name: Compose service status
+        run: docker compose ps
+
+      - name: Install smoke runner deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Run end-to-end smoke tests
+        run: python scripts/smoke_e2e.py --base-url http://localhost:8000
+
+      - name: Print logs on failure
+        if: failure()
+        run: docker compose logs
+
+      - name: Tear down
+        if: always()
+        run: docker compose down -v
+
+  playwright-ui-smoke:
+    name: Playwright UI Smoke
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Install Playwright browser
+        working-directory: frontend
+        run: npx playwright install --with-deps chromium
+
+      - name: Start stack
+        run: docker compose up --build -d
+
+      - name: Wait for frontend and backend
+        run: |
+          for i in {1..45}; do
+            if curl -fsS http://localhost:8000/health > /dev/null && curl -fsS http://localhost:3000 > /dev/null; then
+              echo "Frontend and backend are ready"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Stack not ready in time"
+          docker compose logs
+          exit 1
+
+      - name: Run Playwright smoke tests
+        working-directory: frontend
+        env:
+          PLAYWRIGHT_BASE_URL: http://localhost:3000
+        run: npm run test:e2e
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: frontend/playwright-report
+
+      - name: Tear down
+        if: always()
+        run: docker compose down -v
