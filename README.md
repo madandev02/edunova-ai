@@ -1,114 +1,243 @@
-# EduNova AI
+# EduNova AI - Adaptive Learning Platform
 
-EduNova AI is a real full-stack product for adaptive learning, built to demonstrate production-minded engineering: role-based architecture, automated quality gates, and deployment-ready configuration.
+A production-grade full-stack web application for AI-powered adaptive learning. EduNova enables students to learn at their own pace with personalized recommendations, while instructors manage courses and track student progress through an intuitive dashboard.
 
-It is intentionally portfolio-optimized to communicate one message clearly:
+Built with production best practices: role-based access control, comprehensive testing, CI/CD automation, and deployment-ready infrastructure.
 
-I can build real systems, not just features.
+---
 
-## 🚀 Live Demo
+## 🎯 Features
 
-- Frontend URL: https://your-frontend-domain.com
-- Backend API URL: https://your-backend-api-domain.com
+**For Students:**
+- Personalized learning dashboard with progress tracking
+- Adaptive course recommendations based on skill level
+- Interactive lessons with quizzes and real-time feedback
+- AI-powered learning assistant for contextual guidance
+- Community reviews and discussion forums
 
-## Product Highlights
+**For Instructors:**
+- Course creation and lesson authoring workspace
+- Student progress analytics and performance insights
+- Bulk operations for efficient course management
 
-- JWT-based authentication and protected application routes
-- Role-based access for student, instructor, and admin workflows
-- Course marketplace, learning workspace, and progress tracking
-- Reviews, discussions, analytics, recommendations, and AI assistant guidance
-- Dockerized full-stack local and CI execution
+**For Admins:**
+- User management and role administration
+- Platform analytics and system configuration
 
-## Architecture
+---
 
-```text
-[React Frontend]
-      |
-      | HTTPS + JWT Bearer Token
-      v
-[FastAPI Backend]
-      |
-      | SQLAlchemy ORM
-      v
-[PostgreSQL Database]
+## 🏗️ Tech Stack
 
-Cross-cutting concerns:
-- JWT authentication for protected APIs
-- Role-based access control (student/instructor/admin)
-- AI assistant service for contextual learning guidance
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| **Frontend** | React 19, TypeScript, Vite | Modern UI with type safety |
+| **Backend** | FastAPI, SQLAlchemy ORM, Pydantic | REST API with async support |
+| **Database** | PostgreSQL (production), SQLite (testing) | Reliable data persistence |
+| **Auth** | JWT (python-jose) | Stateless session management |
+| **Testing** | pytest, Vitest, Playwright, React Testing Library | Comprehensive test coverage |
+| **Infrastructure** | Docker Compose, GitHub Actions | Reproducible environments and CI/CD |
+
+---
+
+## 🚀 Quick Start
+
+### Using Docker (Recommended)
+```bash
+docker compose up --build -d
 ```
 
-## Repository Structure
-
-- `frontend/` React + TypeScript + Vite app
-- `backend/` FastAPI + SQLAlchemy services and APIs
-- `docs/` engineering process documentation
-
-## Demo Accounts
-
-- student@test.com / 123456
-- instructor@test.com / 123456
-- admin@test.com / 123456
-
-These accounts are seeded by the backend startup seed routine for reliable demos.
-
-## 🎥 Demo Video
-
-- Watch 90-second walkthrough: [link]
-
-Recommended walkthrough sequence:
-
-- Login flow
-- Student dashboard and learning progress
-- Instructor creating a course
-- AI assistant response in context
-
-## Local Development
-
-### Docker
-
-1. Start stack:
-  - `docker compose up --build -d`
-2. Open:
-  - Frontend: `http://localhost:3000`
-  - Backend docs: `http://localhost:8000/docs`
-  - Health: `http://localhost:8000/health`
+Access:
+- **Frontend:** http://localhost:3000
+- **API Docs:** http://localhost:8000/docs
+- **Health Check:** http://localhost:8000/health
 
 ### Without Docker
 
-1. Backend:
-  - `cd backend`
-  - `pip install -r requirements.txt`
-  - `uvicorn main:app --reload --port 8000`
-2. Frontend:
-  - `cd frontend`
-  - `npm install`
-  - `npm run dev`
+**Backend:**
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+```
 
-## Environment Setup
+**Frontend:**
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-- Backend example: `backend/.env.example`
-- Frontend example: `frontend/.env.example`
+---
 
-Use these files as templates before deployment.
+## 🔐 Demo Accounts
 
-## 🧪 Engineering Quality
+All accounts are pre-seeded for immediate testing:
 
-- Backend tests with pytest (`backend/tests/`)
-- Frontend unit tests with Vitest + Testing Library
-- Frontend E2E and visual smoke tests with Playwright
-- CI pipeline in `.github/workflows/ci.yml` running lint, build, tests, and smoke checks
-- Docker Compose-based reproducible local and CI environments
+| Role | Email | Password |
+|------|-------|----------|
+| Student | `student@test.com` | `123456` |
+| Instructor | `instructor@test.com` | `123456` |
+| Admin | `admin@test.com` | `123456` |
 
-## Recruiter Review Guide
+---
 
-- API routes: `backend/app/routes/`
-- Domain logic: `backend/app/services/`
-- Auth and role guards: `frontend/src/components/auth/`
-- Integration layer: `frontend/src/services/`
-- Test suites: `backend/tests/` and `frontend/src/**/*.test.tsx`
+## 🧪 Testing & Quality
 
-## Additional Notes
+### Run Tests Locally
 
-- Branch protection checklist: `docs/branch-protection.md`
-- Backend and frontend READMEs include stack-specific operational details
+**Backend API Tests:**
+```bash
+python -m pytest backend/tests -q
+```
+Coverage: authentication, authorization, CRUD operations, edge cases, and security
+
+**Frontend Unit Tests:**
+```bash
+cd frontend && npm run test:unit
+```
+
+**End-to-End Tests:**
+```bash
+cd frontend && npm run test:e2e
+```
+
+### Automated Quality Gates
+
+GitHub Actions CI pipeline validates:
+- Lint checks (ESLint, Pylint)
+- Build compilation
+- Backend pytest suite (18 tests)
+- Frontend unit tests (3 tests)
+- Docker Compose health checks
+- Playwright smoke tests
+
+See `.github/workflows/ci.yml` for full pipeline.
+
+---
+
+## 📋 Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    React Frontend                        │
+│         (TypeScript + Vite + React Query)               │
+└──────────────────────┬──────────────────────────────────┘
+                       │ HTTP/JWT Bearer Token
+                       ▼
+┌─────────────────────────────────────────────────────────┐
+│                   FastAPI Backend                        │
+│              (SQLAlchemy ORM + Pydantic)                 │
+│                                                          │
+│  • Auth & Role-Based Access Control                      │
+│  • Course Management & Learning Paths                    │
+│  • Progress Analytics & Recommendations                  │
+│  • AI Assistant Service                                  │
+│  • Reviews & Discussion Forums                           │
+└──────────────────────┬──────────────────────────────────┘
+                       │ SQLAlchemy
+                       ▼
+                  PostgreSQL
+```
+
+---
+
+## 📖 Environment Configuration
+
+### Backend (`.env`)
+```
+DATABASE_URL=postgresql://user:password@localhost/edunova
+SECRET_KEY=your-jwt-secret-key
+JWT_ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+CORS_ORIGINS=http://localhost:3000
+ADMIN_EMAILS=admin@example.com
+DEBUG=false
+```
+
+See `backend/.env.example` for complete reference.
+
+### Frontend (`.env`)
+```
+VITE_API_BASE_URL=http://localhost:8000
+```
+
+See `frontend/.env.example` for details.
+
+---
+
+## 📁 Project Structure
+
+```
+.
+├── backend/               # FastAPI REST API
+│   ├── app/
+│   │   ├── routes/       # HTTP endpoints by domain
+│   │   ├── services/     # Business logic
+│   │   ├── models/       # SQLAlchemy entities
+│   │   ├── schemas/      # Request/response contracts
+│   │   └── core/         # Config, security, auth
+│   ├── tests/            # pytest suite
+│   └── requirements.txt
+├── frontend/              # React + TypeScript app
+│   ├── src/
+│   │   ├── pages/        # Page-level components
+│   │   ├── components/   # Reusable UI components
+│   │   ├── services/     # API client integration
+│   │   └── router.tsx    # Route definitions
+│   ├── package.json
+│   └── vite.config.ts
+└── docker-compose.yml    # Full-stack local setup
+```
+
+---
+
+## ✨ Engineering Highlights
+
+**Code Quality:**
+- Type-safe frontend (TypeScript) and backend (Pydantic)
+- Clear separation of concerns (routes → services → models)
+- Centralized configuration and environment management
+
+**Testing:**
+- 18+ backend API tests covering auth, RBAC, validation, and edge cases
+- Frontend unit tests with React Testing Library
+- E2E smoke tests with Playwright
+- Automated quality gates in CI/CD
+
+**Security:**
+- JWT-based stateless authentication
+- Role-based access control at route and endpoint levels
+- Secure credential handling and CORS configuration
+- Protected API endpoints with 401/403 responses
+
+**Deployment Ready:**
+- Environment variable templates with secure defaults
+- Reproducible Docker Compose setup for development and CI
+- Database migration system
+- Health check endpoints for monitoring
+
+---
+
+## 🎬 Demo Walkthrough
+
+**Recommended flow for evaluation:**
+1. Login with student@test.com
+2. Explore dashboard and course catalog
+3. Start a lesson and interact with AI assistant
+4. Logout and login as instructor@test.com
+5. Create a new course or view student analytics
+
+---
+
+## 📚 Additional Resources
+
+- **Backend README:** [backend/README.md](backend/README.md)
+- **Frontend README:** [frontend/README.md](frontend/README.md)
+- **CI/CD Pipeline:** [.github/workflows/ci.yml](.github/workflows/ci.yml)
+- **Engineering Process:** [docs/branch-protection.md](docs/branch-protection.md)
+
+---
+
+## 📝 License
+
+MIT
